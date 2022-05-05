@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "./;pb";
+
+import "google/protobuf/empty.proto";
+
+service User {
+  rpc TimerDelayValue(DelayValue) returns (google.protobuf.Empty);
+  rpc GetSortByAverageSalary(UserParameterListWithSortValueRequest) returns (AverageSalaryResponse);
+  rpc GetSortOldestAndHighestPaid(UserParameterListWithSortValueRequest) returns (OldestAndHighestPaidResponse);
+  rpc GetSortByValue(UserParameterListWithSortValueRequest) returns (UserParameterListResponse);
+}
+
+message DelayValue  {
+  int64 delayValue = 1;
+}
+
+message UserParameterListWithSortValueRequest {
+    UserParameterList userParameterList = 1;
+}
+
+message UserParameterList{
+  string name = 1;
+  int64 yob = 2;
+  float salary = 3;
+  optional string typeOfSort = 4;
+}
+
+message UserParameterListResponse {
+  string name = 1;
+  int64 yob = 2;
+  float salary = 3;
+}
+
+message AverageSalaryResponse {
+  float average = 1;
+}
+
+message OldestAndHighestPaidResponse{
+  int64 oldest = 1;
+  float highestPaid = 2;
+}
